@@ -235,6 +235,10 @@
     <string name="import_cheats">Import cheats</string>
     <string name="import_cheats_summary">Import cheats from database files to make them available. Only XML databases are supported for now. Any previously imported cheat will be deleted.</string>
     <string name="rom_shortcut">ROM shortcut</string>
+    <string name="add_to_home_screen">Add to home screen</string>
+    <string name="more_options">More options</string>
+    <string name="shortcut_pinned">Shortcut added to home screen</string>
+    <string name="shortcut_pin_unsupported">Your launcher doesn\'t support adding shortcuts to the home screen</string>
 
     <string name="firmware_nickname">Nickname</string>
     <string name="firmware_message">Message</string>

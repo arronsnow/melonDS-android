@@ -33,6 +33,7 @@ fun RomDetailsScreen(
     retroAchievementsUiState: RomRetroAchievementsUiState,
     onNavigateBack: () -> Unit,
     onLaunchRom: (Rom) -> Unit,
+    onAddToHomeScreen: (Rom) -> Unit,
     onRomConfigUpdate: (RomConfigUpdateEvent) -> Unit,
     onRetroAchievementsLogin: (username: String, password: String) -> Unit,
     onRetroAchievementsRetryLoad: () -> Unit,
@@ -54,7 +55,8 @@ fun RomDetailsScreen(
                 rom = rom,
                 pagerState = pagerState,
                 onLaunchRom = { onLaunchRom(rom) },
-                onNavigateBack = onNavigateBack
+                onNavigateBack = onNavigateBack,
+                onAddToHomeScreen = { onAddToHomeScreen(rom) },
             ) {
                 coroutineScope.launch {
                     pagerState.animateScrollToPage(it.tabIndex)
@@ -116,6 +118,7 @@ private fun PreviewRomScreen() {
             retroAchievementsUiState = RomRetroAchievementsUiState.LoggedOut,
             onNavigateBack = { },
             onLaunchRom = { },
+            onAddToHomeScreen = { },
             onRomConfigUpdate = { },
             onRetroAchievementsLogin = { _, _ -> },
             onRetroAchievementsRetryLoad = { },

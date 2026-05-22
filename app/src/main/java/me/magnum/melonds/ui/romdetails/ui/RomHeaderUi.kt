@@ -26,10 +26,18 @@ import androidx.compose.material.TabRow
 import androidx.compose.material.TabRowDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.AddToHomeScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -54,6 +62,7 @@ fun RomHeaderUi(
     pagerState: PagerState,
     onLaunchRom: () -> Unit,
     onNavigateBack: () -> Unit,
+    onAddToHomeScreen: () -> Unit = {},
     onTabClicked: (RomDetailsTab) -> Unit,
 ) {
     CompositionLocalProvider(LocalElevationOverlay provides null) {
@@ -85,6 +94,29 @@ fun RomHeaderUi(
                             colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary, contentColor = MaterialTheme.colors.onSecondary),
                         ) {
                             Text(text = stringResource(R.string.play).uppercase())
+                        }
+
+                        var menuExpanded by remember { mutableStateOf(false) }
+                        IconButton(onClick = { menuExpanded = true }) {
+                            Icon(Icons.Filled.MoreVert, contentDescription = stringResource(R.string.more_options))
+                        }
+                        DropdownMenu(
+                            expanded = menuExpanded,
+                            onDismissRequest = { menuExpanded = false },
+                        ) {
+                            DropdownMenuItem(
+                                onClick = {
+                                    menuExpanded = false
+                                    onAddToHomeScreen()
+                                },
+                            ) {
+                                Icon(
+                                    modifier = Modifier.padding(end = 16.dp),
+                                    imageVector = Icons.Filled.AddToHomeScreen,
+                                    contentDescription = null,
+                                )
+                                Text(text = stringResource(R.string.add_to_home_screen))
+                            }
                         }
                     }
                 )
